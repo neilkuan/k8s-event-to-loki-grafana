@@ -1,6 +1,6 @@
 # Kubernetes Event Exporter with Loki and Grafana
 
-![](./img/arch.png)
+![](./img/arch-0.png)
 
 ## 🚨 🚨 🚨 Before install helm chart, Please update the `$LOKI_URL` in `values.yaml` file. 🚨 🚨 🚨
 > If you use docker compose to run loki and grafana, you can input your compute IP at LOKI_URL.
