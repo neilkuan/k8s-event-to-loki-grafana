@@ -1,0 +1,11 @@
+* Grafana URL should be:
+svc_name=$(kubectl get svc -l 'app.kubernetes.io/name=grafana' -o name)
+
+kubectl get $svc_name 
+
+# port forward to localhost 
+kubectl port-forward $svc_name 3000:3000
+
+Grafana Admin:
+user: admin
+password: k8s-event-to-loki-grafana

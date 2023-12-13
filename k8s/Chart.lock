@@ -1,0 +1,9 @@
+dependencies:
+- name: kubernetes-event-exporter
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 2.10.0
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 7.0.17
+digest: sha256:e9402ef21e8af592ccc8586b26f946b2e0c017d4dbfea415529fa36c651736d8
+generated: "2023-12-13T12:25:48.429034+08:00"

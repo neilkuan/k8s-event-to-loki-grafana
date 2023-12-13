@@ -1,0 +1,81 @@
+grafana:
+  adminUser: admin
+  adminPassword: "k8s-event-to-loki-grafana"
+  service:
+    port: 3000
+  image:
+    tag: 9.5.1
+  persistence:
+    enabled: true
+    size: 100Mi
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Loki
+        type: loki
+        uid: P8E80F9AEF21F6940
+        access: proxy
+        url: http://loki:3100
+        editable: true
+        jsonData:
+          maxLines: 1000
+  dashboardProviders:
+   dashboardproviders.yaml:
+     apiVersion: 1
+     providers:
+     - name: 'default'
+       orgId: 1
+       folder: ''
+       type: file
+       disableDeletion: false
+       editable: true
+       options:
+         path: /var/lib/grafana/dashboards/default
+  dashboards:
+    default:
+      events:
+        url: https://raw.githubusercontent.com/neilkuan/k8s-event-to-loki-grafana/main/dashboard.json
+
+kubernetes-event-exporter:
+  config:
+    logLevel: debug
+    metricsNamePrefix: 'event_exporter_'
+    logFormat: json
+    receivers:
+      # - name: dump
+      #   file:
+      #   layout: {}
+      #   path: /dev/stdout
+      - name: loki
+        loki:
+          streamLabels:
+            app: kubernetes-event-exporter
+            dataCenter: local-cluster
+          url: http://loki:3100/loki/api/v1/push
+          # layout:
+          #   message: "{{ .Message }}"
+          #   reason: "{{ .Reason }}"
+          #   type: "{{ .Type }}"
+          #   count: "{{ .Count }}"
+          #   kind: "{{ .InvolvedObject.Kind }}"
+          #   name: "{{ .InvolvedObject.Name }}"
+          #   namespace: "{{ .Namespace }}"
+          #   component: "{{ .Source.Component }}"
+          #   host: "{{ .Source.Host }}"
+      # - name: webhook
+      # use lambda function Url
+      # allow NONE auth type 
+        # webhook:
+          # lambda python example see lambda/
+          # headers:
+          #   data-center: local-cluster
+          # endpoint: https://xxxxxxxxxxxxx.lambda-url.region.on.aws/
+    route:
+      routes:
+      # - match:
+      #   - receiver: dump
+      - match:
+        - receiver: loki
+      # - match:
+        # - receiver: webhook
