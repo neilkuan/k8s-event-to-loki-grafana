@@ -87,6 +87,8 @@ docker compose down
 ```bash
 cd k8s/
 
+helm dependency build
+
 helm upgrade -i k8s-event-to-loki-grafana ./
 Release "k8s-event-to-loki-grafana" does not exist. Installing it now.
 
