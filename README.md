@@ -85,11 +85,10 @@ docker compose down
 ---
 ## ALL in Kubernetes Example
 ```bash
-cd k8s/
+helm repo add k8s-event-to-loki-grafana https://neilkuan.github.io/k8s-event-to-loki-grafana/
 
-helm dependency build
+helm upgrade -i k8s-event-to-loki-grafana k8s-event-to-loki-grafana/k8s-event-to-loki-grafana
 
-helm upgrade -i k8s-event-to-loki-grafana ./
 Release "k8s-event-to-loki-grafana" does not exist. Installing it now.
 
 --- example output ---
