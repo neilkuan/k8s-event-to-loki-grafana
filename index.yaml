@@ -1,0 +1,20 @@
+apiVersion: v1
+entries:
+  k8s-event-to-loki-grafana:
+  - apiVersion: v2
+    created: "2024-01-03T17:46:27.867802+08:00"
+    dependencies:
+    - name: kubernetes-event-exporter
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.10.0
+    - name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 7.0.17
+    description: k8s-event-to-loki-grafana Helm chart
+    digest: 0209ddc31a489591a097cc4b8885ce3f928de75cc8999786a03e9c1ccdb61dc1
+    name: k8s-event-to-loki-grafana
+    type: application
+    urls:
+    - https://neilkuan.github.io/k8s-event-to-loki-grafana/k8s-event-to-loki-grafana-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-01-03T17:46:27.863205+08:00"
